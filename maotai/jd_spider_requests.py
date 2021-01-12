@@ -383,7 +383,8 @@ class JdSeckill(object):
         reserve_url = resp_json.get('url')
         while True:
             try:
-                self.session.get(url='https:' + reserve_url)
+                response = self.session.get(url='https:' + reserve_url)
+                logger.info('预约请求返回[http_status={}]'.format(response.status_code))
                 logger.info('预约成功，已获得抢购资格 / 您已成功预约过了，无需重复预约')
                 if global_config.getRaw('messenger', 'enable') == 'true':
                     success_message = "预约成功，已获得抢购资格 / 您已成功预约过了，无需重复预约"
